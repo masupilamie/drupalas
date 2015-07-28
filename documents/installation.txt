@@ -1,0 +1,97 @@
+
+*** This document is still under development
+	and right now it just functions as a guideline
+
+	This installation guide is for both the simplesamlphp_idp
+	and the drupalas module
+
+	the module-specifics start at the
+	"If the above is working" step
+
+
+
+*** To make this work you need both modules installed, enabled and configured correctly:
+
+	-drupalas module for SimpleSAMLphp
+	https://github.com/masupilamie/drupalas
+
+	-simplesamlphp_idp module for Drupal
+	https://www.drupal.org/sandbox/masupilamie/2541022
+
+
+*** Start by making sure SimpleSAMLphp is installed and configured correctly
+	(you can skip this step if you know what you're doing)
+	https://simplesamlphp.org/docs/stable/simplesamlphp-install
+
+
+*** Set up both a service provider and an identity provider
+	(first make it work without these modules using the
+	default SimpleSAMLphp examples)
+	(you can skip this step if you know what you're doing)
+	
+	-SimpleSAMLphp Identity Provider
+	https://simplesamlphp.org/docs/stable/simplesamlphp-idp
+
+	SimpleSAMLphp Service Provider
+	https://simplesamlphp.org/docs/stable/simplesamlphp-sp
+
+
+
+*** If the above is working we have to change the session store type
+	in SimpleSAMLphp
+
+	-temporarily taken from the simplesamlphp_auth drupal module:
+	(this issue also exists with the simplesamlphp_idp module
+	so make sure NOT to use phpsession store.type in config.php)
+
+	NOTE: Your SimpleSAMLphp SP must be configured to use something
+	other than "phpsession" (the default) for session storage.
+	The alternatives are memcache or sql.
+	The sql option was added in SimpleSAMLphp version 1.7.
+	The simplest solution for folks running SimpleSAMLphp
+	version 1.7 or higher is to edit the SimpleSAMLphp config/config.php
+	by setting
+	store.type => 'sql' and 'store.sql.dsn' => 'sqlite:/path/to/sqlitedatabase.sq3'
+
+
+*** Install this module in the SimpleSAMLphp identity provider installation directory under modules
+	(this module will enable by itself)
+
+
+*** Create a new authentication source in the SimpleSAMLphp identity provider's authsources.php
+	The drupalas module uses custom configuration values which must be present
+	See the example in documents
+	(the example also contains information about the configuration options)
+	https://github.com/masupilamie/drupalas/blob/master/documents/examples/example-authsources.php.txt
+
+
+
+*** Now on the Drupal side install the simplesamlphp_idp module
+	-make sure the configuration values are correct on the module configuration page
+	(admin/config/people/simplesamlphp_idp_settings)
+
+
+*** From this point onwards, if the simplesamlphp_idp module for drupal is enabled,
+	you will receive drupal (error) log messages about what is going wrong.
+	You should definitely check the drupal log if you're stuck.
+
+
+
+*** At this point there is a fair chance you have a working SAML IdP
+	getting it's user information from Drupal.
+	But if not, here are some pointers:
+
+	-Enable the simplesamlphp_idp and check the log
+	(the log messages will only show if a saml authentication is requested)
+
+	-is the name of the authentication source used in saml20-idp-hosted.php under 'auth'
+	also available in authsources.php
+	and is this authentication source configured to use the
+	drupalas module for authentication?
+	(like: 'drupalas:default')
+
+	-make really sure everything is working with the default SimpleSAMLphp examples
+
+	-If you did not use the authentication source example you will never get this to work
+	because the drupalas module requires special configuration parameters
+	which are present in the authentication source configuration example.

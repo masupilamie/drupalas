@@ -1,20 +1,28 @@
-*** Configuring authsources.php ***
+*** Configuring authsources.php
 
-*** <simplesamlphp-root>/config/authsources.php ***
+*** <simplesamlphp-root>/config/authsources.php
 
-*** add this to simplesamlphp's config/authsources.php and edit values ***
+*** add text below to simplesamlphp (configured as an identity provider)
+*** config/authsources.php and edit values
 
 ////////////////////////////////////////////////////////////////////////////////////////
+// START OF EXAMPLE CONFIG
+
 //
 // drupalas-example can be changed to anything you like,
 // just don't forget to set the same value in the drupal module settings
+// and under 'auth' in metadata/saml20-idp-hosted.php
 //
 'drupalas-example' => array(
 
-    // Some options are only used if another option is enabled
+    // Some options are only used if another option is set
+    // to true
+    //
     // options that are not always used have this written in the text above the option
-    // still all configuration options must be present
-    // (accept for cookie_domain, which is only used when cookie_secure is set to true)
+    //
+    // STILL ALL CONFIGURATION OPTIONS MUST BE PRESENT
+    // (except for cookie_domain, which can be commented out)
+    //
 
 
     //there are no other options for this
@@ -24,14 +32,14 @@
 
     // Whether to turn on debug
     // no special debug settings are used in this module
-    // check the drupal log for details
-    // (after installing and configurating the drupal simplesamlphp_idp module)
+    // check the drupal log for details about errors
+    // (after installing and configuring the drupal simplesamlphp_idp module)
     //
     'debug' => false,
 
 
-    // The filesystem path of the drupal directory.
-    // this opting is required
+    // The filesystem path to the drupal site root.
+    // this option is required
     //
     'drupal_dir' => '/var/www/drupal',
 
@@ -39,21 +47,22 @@
     // The URL to the drupal login page
     // this must be <drupal site base url>/user
     // although maybe user/login will also work
-    // must be a full URL (including https://or http://, without a trailing slash at the end)
+    // must be a full URL (including https://or http://, WITHOUT a trailing slash at the end)
     //
     'drupal_login_url' => 'https://changeme.com/user',
 
 
     // The URL to the drupal logout page
     // in reality this can be any URL pointing to your drupal site,
-    // but a good practice is using <drupal site base url>/user/logout (e.g. domain.com/user/logout )
+    // but a good practice would be using <drupal site base url>/user/logout (e.g. domain.com/user/logout )
     // or just the site base URL
-    // must be a full URL (including https://or http://, without a trailing slash at the end)
+    // must be a full URL (including https://or http://, WITHOUT a trailing slash at the end)
     //
     'drupal_logout_url' => 'https://changeme.com/user/logout',
 
 
-    // The hash algorithm used for hashing the get and cookie key
+    // The hash algorithm used for hashing the _GET and cookie
+    // session salts
     // the php hash() function is used for hashing so it can be
     // any value supported by hash().
     //
@@ -64,8 +73,8 @@
 
     // Whether to use a cookie during authentication THIS SHOULD BE SET TO true IN ANY PRODUCTION ENVIRONMENT
     // this option is only added so you can test without a cookie
-    // BUT THIS IS INSECURE AND SHOULD ONLY BE SET TO false FOR TESTING PURPOSES
-    // must be true or false (without any quotes)
+    // BUT THIS IS INSECURE AND SHOULD ONLY BE false FOR TESTING PURPOSES
+    // must be boolean, so true or false (without any quotes)
     //
     'use_cookie' => true,
 
@@ -73,7 +82,7 @@
     // The cookie name to use
     //
     // this setting is only used when use_cookie is set to TRUE
-    //
+    // nevertheless this option must alway be present
     //
     'cookie_name' => 'SimpleSAMLAuthBridge',
 
@@ -81,19 +90,21 @@
     // whether the cookie used will be a secure cookie
     // (secure means the cookie is only allowed over an encrypted
     // connection, https:// )
-    // this should be set to true in an production environment
-    // must be true or false (without any quotes)
     //
-    // this setting is only used when use_cookie is set to enabled
+    // this should be set to true in an production environment
+    //
+    // must be boolean, so true or false (without any quotes)
+    //
+    // this setting is only used when use_cookie is set to true
     // nevertheless this option must alway be present
     //
     'cookie_secure' => false,
 
 
     // The domain name used for the cookie
-    // either the domain name of the simplesaml identity provider
+    // either the domain of the simplesamlphp identity provider
     // or the domain of the drupal site
-    // required value to use a cookie
+    //
     // only a valid domain with or without any subdomains is allowed
     //
     // this setting is only used when both use_cookie and cookie_secure are
@@ -109,18 +120,19 @@
 
     // The drupal user attributes that will be collected.
     //
-    // the four default drupaluservar lines are good for testing (and production if you don't need anything extra)
+    // the four default drupaluservar lines  enabled by default in this example
+    // are good for testing (and production if you don't need anything extra)
     // afterward you can enable more by adding them to the list
     //
     // some examples on how to expand your users attributes
-    // (just add one or more of the following lines lines to the attributes list below):
+    // (just add one or more of the following rows between the attributes rows below):
     // array('drupaluservar' => 'field_first_name',  'callit' => 'givenName'),
     // array('drupaluservar' => 'field_last_name',   'callit' => 'sn'),
     // array('drupaluservar' => 'field_organization','callit' => 'ou'),
     //
-    // If you want to fetch all the user variables available, remove all drupaluservar lines
+    // If you want to fetch all the user variables available, remove all drupaluservar rows
     // (don't forget to remove one ")," just beneath the last drupaluservar line)
-    // and change the attributes value to:
+    // and change the attributes value to null (without quotes), like:
     // 'attributes' => null,
     //
     'attributes' => array(
@@ -131,4 +143,5 @@
                         ),
 ),
 
+// END OF EXAMPLE CONFIG
 ////////////////////////////////////////////////////////////////////////////////////////

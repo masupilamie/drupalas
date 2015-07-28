@@ -3,21 +3,7 @@
 /**
  * Drupal authentication source configuration parser.
  *
- * config values that must be present in authsources.php under drupalas:default
- * populated with the default values
- * 'debug' => FALSE,
- * 'drupal_basedir' => '/var/www/drupal',
- * 'drupal_login_url' => 'https://example.com/user',
- * 'drupal_logout_url' => 'https://example.com/user/logout',
- * 'use_cookie' => TRUE,
- * 'cookie_name' => 'SimpleSAMLAuthBridge',
- * 'cookie_secure' => FALSE,
- * 'attributes' => array(
- *                      array('drupaluservar'   => 'uid',  'callit' => 'uid'),
- *                      array('drupaluservar' => 'name', 'callit' => 'cn'),
- *                      array('drupaluservar' => 'mail', 'callit' => 'mail'),
- *                      array('drupaluservar' => 'roles','callit' => 'roles'),
- *                      ),
+ * see docments/examples for a authsources.php configuration example
  *
  */
 class sspmod_drupalas_ConfigHelper {

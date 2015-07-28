@@ -5,5 +5,7 @@ A SimpleSAMLphp module connecting to Drupal and using its front page and user ba
 This module can be configured through SimpleSAMLphp's authsources.php (see example configuration).
 
 
-
 For this module to function, Drupal must have the "SimpleSAMLphp IdP" module enabled and configured correctly.
+
+
+see documents/installation.txt for further instructions

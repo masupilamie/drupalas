@@ -55,6 +55,11 @@ class sspmod_drupalas_Auth_Source_default extends SimpleSAML_Auth_Source {
    */
   private $cookie_secure;
 
+  /**
+   * The cookie domain, only used when secure cookie is set to TRUE
+   */
+  private $cookie_domain;
+
 
   /**
    * Constructor for this authentication source.
@@ -76,6 +81,7 @@ class sspmod_drupalas_Auth_Source_default extends SimpleSAML_Auth_Source {
 
     $this->debug       = $drupalAuthConfig->getDebug();
     $this->attributes  = $drupalAuthConfig->getAttributes();
+    $this->drupal_dir = $drupalAuthConfig->getDrupalDir();
     $this->drupal_login_url = $drupalAuthConfig->getDrupalLoginUrl();
     $this->drupal_logout_url = $drupalAuthConfig->getDrupalLogoutURL();
     $this->hash_algorithm = $drupalAuthConfig->getHashAlgorithm();
@@ -101,8 +107,7 @@ class sspmod_drupalas_Auth_Source_default extends SimpleSAML_Auth_Source {
     require_once(DRUPAL_ROOT.'/includes/file.inc');
 
     /* Using DRUPAL_BOOTSTRAP_FULL means that SimpleSAMLphp must use an session storage
-     * mechanism other than phpsession (see: store.type in config.php). However, this trade-off
-     * prevents the need for hackery here and makes this module work better in different environments.
+     * mechanism other than phpsession (see: store.type in config.php).
      */
     drupal_bootstrap(DRUPAL_BOOTSTRAP_FULL);
 
@@ -321,19 +326,6 @@ class sspmod_drupalas_Auth_Source_default extends SimpleSAML_Auth_Source {
     //this will be null if authentication failed and an array if authentication succeeded
     return $attributes;
 
-    //return attributes if there are any (if there are this indicates authentication has succeeded)
-    //this is not needed as attributes will be null if failed anyway
-    /*if ($attributes != NULL) {
-
-      //Authentication has succeeded!!!
-      return $attributes;
-
-    } else {
-
-      //make sure we return null so it is clear authentication has failed
-      return NULL;
-    }*/
-
   }
 
   /**
@@ -474,14 +466,10 @@ class sspmod_drupalas_Auth_Source_default extends SimpleSAML_Auth_Source {
     assert('is_array($state)');
 
     //session_start not called before. Do it here.
+    //no session start needed as everything seems to work fine without?
     /*if (!session_id()) {
       session_start();
     }*/
-
-    /*
-     * In this example we simply remove the 'uid' from the session.
-     */
-    //unset($_SESSION['uid']);
 
     $stateId = SimpleSAML_Auth_State::saveState($state, 'drupalas_logout');
 

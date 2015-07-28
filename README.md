@@ -1,8 +1,8 @@
 # drupalas
 
-A SimpleSAML module connecting to drupal and using its front page and user base for SAML authentication.
+A SimpleSAMLphp module connecting to drupal and using its front page and user base for SAML authentication.
 
-This module can be configured through simplesamlphp's authsources.php (see example configuration).
+This module can be configured through SimpleSAMLphp's authsources.php (see example configuration).
 
 
 

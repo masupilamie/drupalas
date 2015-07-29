@@ -1,138 +1,153 @@
-*** Configuring authsources.php
-
-*** <simplesamlphp-root>/config/authsources.php
-
 *** add text below to simplesamlphp (configured as an identity provider)
-*** config/authsources.php and edit values
+*** authsources file
+***
+*** see <simplesamlphp root>/config/authsources.php
+***
+*** don't forget to edit the values where needed
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // START OF EXAMPLE CONFIG
 
 //
 // drupalas-example can be changed to anything you like,
-// just don't forget to set the same value in the drupal module settings
-// and under 'auth' in metadata/saml20-idp-hosted.php
+// just don't forget to also set the same value in:
+//
+// - 'auth' found in <simplesamlphp root>/metadata/saml20-idp-hosted.php
+// - 'authentication source used by simplesamlphp' in the simplesamlphp_idp module for Drupal
 //
 'drupalas-example' => array(
 
-    // Some options are only used if another option is set
-    // to true
+    // Some options are only used if another option is set to true.
     //
-    // options that are not always used have this written in the text above the option
-    //
-    // STILL ALL CONFIGURATION OPTIONS MUST BE PRESENT
-    // (except for cookie_domain, which can be commented out)
+    // Options that are not always used have this written in the text above the option.
     //
 
 
-    //there are no other options for this
+    // there are no other options for this.
+    //
+    // This option is required.
     //
     'drupalas:default',
 
 
-    // Whether to turn on debug
-    // no special debug settings are used in this module
-    // check the drupal log for details about errors
-    // (after installing and configuring the drupal simplesamlphp_idp module)
+    // Whether to turn on debug.
+    // No special debug settings are used in this module
+    // check the drupal log for details about errors.
+    // (After installing and configuring the simplesamlphp_idp module for Drupal.)
+    //
+    // This option is required.
     //
     'debug' => false,
 
 
     // The filesystem path to the drupal site root.
-    // this option is required
+    //
+    // This option is required.
     //
     'drupal_dir' => '/var/www/drupal',
 
 
-    // The URL to the drupal login page
-    // this must be <drupal site base url>/user
-    // although maybe user/login will also work
-    // must be a full URL (including https://or http://, WITHOUT a trailing slash at the end)
+    // The URL to the drupal login page.
+    //
+    // This must be <drupal site base url>/user
+    // although maybe user/login will also work.
+    //
+    // Must be a full URL (including https://or http://, WITHOUT a trailing slash at the end).
+    //
+    // This option is required.
     //
     'drupal_login_url' => 'https://changeme.com/user',
 
 
-    // The URL to the drupal logout page
-    // in reality this can be any URL pointing to your drupal site,
-    // but a good practice would be using <drupal site base url>/user/logout (e.g. domain.com/user/logout )
-    // or just the site base URL
-    // must be a full URL (including https://or http://, WITHOUT a trailing slash at the end)
+    // The URL to the drupal logout page.
+    //
+    // In reality this can be any URL pointing to your drupal site,
+    // but a good practice would be using <drupal site base url>/user/logout
+    // (e.g. domain.com/user/logout ) or just the site base URL.
+    //
+    // Must be a full URL (including https://or http://, WITHOUT a trailing slash at the end).
+    //
+    // This option is required.
     //
     'drupal_logout_url' => 'https://changeme.com/user/logout',
 
 
     // The hash algorithm used for hashing the _GET and cookie
-    // session salts
-    // the php hash() function is used for hashing so it can be
+    // session salts.
+    //
+    // The php hash() function is used for hashing so it can be
     // any value supported by hash().
     //
     // As a good practice you can either set it to 'sha256' or 'sha512'
     //
+    // This option is required.
+    //
     'hash_algorithm' => 'sha256',
 
 
-    // Whether to use a cookie during authentication THIS SHOULD BE SET TO true IN ANY PRODUCTION ENVIRONMENT
-    // this option is only added so you can test without a cookie
-    // BUT THIS IS INSECURE AND SHOULD ONLY BE false FOR TESTING PURPOSES
-    // must be boolean, so true or false (without any quotes)
+    // Whether to use a cookie during authentication
+    //
+    // THIS SHOULD BE SET TO true IN ANY PRODUCTION ENVIRONMENT.
+    //
+    // This option is only added so you can test without a cookie
+    // BUT THIS IS INSECURE AND SHOULD ONLY BE false FOR TESTING PURPOSES.
+    //
+    // Must be boolean, so true or false (without any quotes).
+    //
+    // This option is required.
     //
     'use_cookie' => true,
 
 
-    // The cookie name to use
+    // The cookie name to use.
     //
-    // this setting is only used when use_cookie is set to TRUE
-    // nevertheless this option must alway be present
+    // This setting is only used when use_cookie is set to TRUE.
     //
     'cookie_name' => 'SimpleSAMLAuthBridge',
 
 
-    // whether the cookie used will be a secure cookie
-    // (secure means the cookie is only allowed over an encrypted
-    // connection, https:// )
+    // Whether the cookie used will be a secure cookie.
+    // (Secure means the cookie is only allowed over an encrypted
+    // connection, https:// .)
     //
-    // this should be set to true in an production environment
+    // Must be boolean, so true or false (without any quotes).
     //
-    // must be boolean, so true or false (without any quotes)
-    //
-    // this setting is only used when use_cookie is set to true
-    // nevertheless this option must alway be present
+    // This setting is only used when use_cookie is set to true.
     //
     'cookie_secure' => false,
 
 
-    // The domain name used for the cookie
-    // either the domain of the simplesamlphp identity provider
-    // or the domain of the drupal site
+    // The domain name used for the secure cookie.
     //
-    // only a valid domain with or without any subdomains is allowed
+    // Only a valid domain with or without any subdomains is allowed.
     //
-    // this setting is only used when both use_cookie and cookie_secure are
-    // set to true
+    // Both the Drupal site and the SimpleSAMLphp need to be on the same domain,
+    // this should be set to that domain.
     //
-    // (This is the only setting that can be commented out)
-    //
-    // You probably need to set this (and set cookie_secure to true) if
-    // your idp and drupal site are on a different domain (untested!)
+    // This setting is only used when both use_cookie and cookie_secure are
+    // set to true.
     //
     //'cookie_domain' => 'changeme.com',
 
 
-    // The drupal user attributes that will be collected.
+    // The Drupal user attributes that will be collected.
     //
-    // the four default drupaluservar lines  enabled by default in this example
-    // are good for testing (and production if you don't need anything extra)
-    // afterward you can enable more by adding them to the list
+    // The four default drupaluservar lines enabled by default in this example
+    // are good for testing (and production if you don't need anything extra),
+    // afterward you can enable more by adding them to the list.
     //
-    // some examples on how to expand your users attributes
+    // Some examples on how to expand your users attributes
     // (just add one or more of the following rows between the attributes rows below):
+    //
     // array('drupaluservar' => 'field_first_name',  'callit' => 'givenName'),
     // array('drupaluservar' => 'field_last_name',   'callit' => 'sn'),
     // array('drupaluservar' => 'field_organization','callit' => 'ou'),
     //
-    // If you want to fetch all the user variables available, remove all drupaluservar rows
-    // (don't forget to remove one ")," just beneath the last drupaluservar line)
-    // and change the attributes value to null (without quotes), like:
+    // If you want to fetch all the user variables available,
+    // change the attributes value to null. You can do this by removing all drupaluservar
+    // rows (don't forget to remove one ")," just beneath the last drupaluservar line).
+    // and change the value of 'attributes' to "null" (without quotes), like:
+    //
     // 'attributes' => null,
     //
     'attributes' => array(

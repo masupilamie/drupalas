@@ -54,14 +54,15 @@
 	store.type => 'sql' and 'store.sql.dsn' => 'sqlite:/path/to/sqlitedatabase.sq3'
 
 
-*** Install this module in the SimpleSAMLphp identity provider installation directory under modules
-	(this module will enable by itself)
+*** Install the drupalas module in the SimpleSAMLphp identity provider installation directory under modules
+	(make sure the folder is just "drupalas" (without quotes), and NOT something like drupalas-master or drupalas-source, rename if necessary)
+	(the module will enable by itself)
 
 
 *** Create a new authentication source in the SimpleSAMLphp identity provider's authsources.php
 	The drupalas module uses custom configuration values which must be present
 	See the example in documents
-	(the example also contains information about the configuration options)
+	(the example also contains information about the configuration options used)
 	https://github.com/masupilamie/drupalas/blob/master/documents/examples/example-authsources.php.txt
 
 
@@ -81,17 +82,19 @@
 	getting it's user information from Drupal.
 	But if not, here are some pointers:
 
-	-Enable the simplesamlphp_idp and check the log
-	(the log messages will only show if a saml authentication is requested)
+	-Enable the simplesamlphp_idp module in drupal and check the log
+	(the log messages will only show after a saml authentication is requested)
 
 	-is the name of the authentication source used in saml20-idp-hosted.php under 'auth'
 	also available in authsources.php
 	and is this authentication source configured to use the
 	drupalas module for authentication?
-	(like: 'drupalas:default')
+	(like in the example: 'drupalas:default')
 
 	-make really sure everything is working with the default SimpleSAMLphp examples
 
-	-If you did not use the authentication source example you will never get this to work
+	-If you did not use the authentication source example
+	and you dit not add the custom configuration options needed for this module to work
+	(onfigured in authsources.php) you will never get this to work
 	because the drupalas module requires special configuration parameters
 	which are present in the authentication source configuration example.

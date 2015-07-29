@@ -1,0 +1,10 @@
+This module uses code also used in other SimpleSAMLphp authentication source modules.
+(The code used for SimpleSAMLphp authentication modules have a lot in common
+so there are probably other original authors who deserve mentioning.
+Please contact me if you know more.)
+
+Special credits and thank go out to Andreas Åkre Solberg, Snorre Løvås and Steve Moitozo for creating and sharing
+the drupalauth module.
+
+Code used from the drupalauth module falls under the CC-GNU LGPL version 2.1 license.
+http://creativecommons.org/licenses/LGPL/2.1/

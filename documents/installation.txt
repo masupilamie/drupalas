@@ -1,10 +1,13 @@
 ****** This document is still under development
 
-****** Important notes
 
-	This installation guide is for both:
+****** This installation guide is for both:
+
 	-drupalas module for SimpleSAMLphp
 	-simplesamlphp_idp module for Drupal
+
+
+****** Important notes
 
 	Do not use phpsession for session storage in SimpleSAMLphp.
 	Use sql or memcache instead.
@@ -15,8 +18,10 @@
 	the SimpleSAMLphp Identity Provider should be reachable through https://example.com/simplesaml/
 	(Connecting SAML Service Providers can be on any domain.)
 
+	Clean URLs must be enabled in Drupal.
 
-****** To make this work you need both of these modules installed,
+
+****** To make this works you need both of these modules installed,
 	enabled, and configured correctly:
 
 	-drupalas module for SimpleSAMLphp
@@ -24,7 +29,6 @@
 
 	-simplesamlphp_idp module for Drupal
 	https://www.drupal.org/sandbox/masupilamie/2541022
-
 
 
 
@@ -57,15 +61,11 @@
 		Service Provider is a good option for testing.)
 	-Use the SAML service provider to check authentication.
 
-	-See documents/installation.txt for more details.
-
 ****** End of short installation overview ******
 
 
 
-
 ****** Installation details
-
 
 
 *** SimpleSAMLphp Part ***

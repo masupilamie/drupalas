@@ -135,7 +135,7 @@
 
 	The drupalas module uses custom configuration values which must be present,
 	use the example provided with the drupalas module and edit the configuration values
-	when necessary.
+	where necessary.
 	(The example also contains information about the new configuration options.)
 
 	https://github.com/masupilamie/drupalas/blob/master/documents/examples/example-authsources.php.txt
@@ -146,8 +146,8 @@
 
 	Make sure the name used for the authentication source is the same name used
 	in the 'auth' value of the SimpleSAMLphp Identity Provider configuration.
-	(this 'auth' option can be found in metadata/saml-idp-hosted.php inside the
-	SimpleSAMLphp root directory.
+	(This 'auth' option can be found in metadata/saml-idp-hosted.php inside the
+	SimpleSAMLphp root directory.)
 
 	The example uses "drupalas-example" (without quotes) as authentication source name,
 	If you keep the example value, you just have to also put this value in saml-idp-hosted.php
@@ -199,8 +199,8 @@
 
 	If you are able to login, make sure that SAML SLO (single logout) is also working.
 
-	Do this by logging out through Drupal when a SAML session is already authenticated,
-	afterwards make sure your SAML session is also lost.
+	Do this by logging out through a SAML Service Provider when a Drupal session is already authenticated,
+	afterwards make sure your Drupal session is also lost.
 	(A clear indication of SAML SLO not working is when you have an authenticated session
 	at two SAML Service Providers using the same SAML Identity Provider and when logging
 	out of one of them you remain logged in at the other)
@@ -238,7 +238,7 @@
 
 
 *** If you did not use or look at the authentication source example
-	you will never get this to work, because the drupalas module requires
+	you will never get this to work. This is because of the drupalas module requiring
 	special configuration parameters which are present in the
 	authentication source configuration example.
 

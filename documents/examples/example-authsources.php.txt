@@ -1,9 +1,9 @@
-*** add text below to simplesamlphp (configured as an identity provider)
-*** authsources file
-***
-*** see <simplesamlphp root>/config/authsources.php
-***
-*** don't forget to edit the values where needed
+//*** add text below to simplesamlphp (configured as an identity provider)
+//*** authsources file
+//***
+//*** see <simplesamlphp root>/config/authsources.php
+//***
+//*** don't forget to edit the values where needed
 
 ////////////////////////////////////////////////////////////////////////////////////////
 // START OF EXAMPLE CONFIG
